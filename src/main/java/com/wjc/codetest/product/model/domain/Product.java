@@ -69,6 +69,21 @@ public class Product {
         this.name = name;
     }
 
+    /*
+        [문제] Getter 중복 문제
+
+        [원인] Lombok의 @Getter는 컴파일 시 자동으로 각 필드의 Getter 메서드를 생성합니다, 따라서 수동으로 작성한 Getter와 중복됩니다.
+
+        [개선안]
+            대안:
+                Lombok의 @Getter를 유지하고, 수동으로 작성된 Getter 메서드를 삭제합니다.
+
+            트레이드 오프:
+                Lombok에 대한 의존성이 생기지만, 가독성과 개발 편의성을 높혀줍니다.
+
+            선택 근거:
+                Lombok은 널리 사용되는 라이브러리이기 때문에, Getter 정도는 가독성과 개발 편의성 측면에서 사용하는 것이 효율적이라고 생각합니다.
+    */
     public String getCategory() {
         return category;
     }
