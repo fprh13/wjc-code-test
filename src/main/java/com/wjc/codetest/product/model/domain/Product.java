@@ -4,6 +4,34 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+/*
+    [문제] Entity의 Setter로 인해 가독성과 유지보수성이 저하됩니다.
+
+    [원인] Setter 메서드가 외부에 공개되어 있어, 외부 코드가 객체의 상태를 언제든지 변경할 수 있게 된 것이 원인입니다.
+
+    [개선안]
+        대안:
+            @Setter를 제거하고, 의도를 명확히 드러내는 의미 있는 메서드를 사용합니다.
+            ex)
+                public void update(String name, String category) {
+                    this.name = name;
+                    this.category = category;
+                }
+
+        트레이드오프:
+            Setter는 가장 간단한 수정 방식입니다.
+            IDE 단축키나 Lombok 어노테이션으로 손쉽게 생성할 수 있지만,
+            외부에서 무분별하게 사용하면 유지보수성이 떨어집니다.
+
+            Setter보다 번거롭더라도, 명확한 의도를 가진 메서드명을 사용해 업데이트 로직을 표현하는 것이 좋습니다.
+
+        선택 근거:
+            setter는 개발 시 편리하지만, 외부에서 객체의 상태를 언제든지 변경할 수 있기 때문에
+            객체의 일관성을 해치는 위험이 존재합니다.
+
+            setter 대신 의미 있는 메서드를 사용하면 코드의 의도가 명확해지기 때문에
+            협업 시 메서드명만 보더라도 어떤 변경이 일어나는지 쉽게 이해할 수 있어 가독성과 유지보수성이 향상됩니다.
+*/
 @Entity
 @Getter
 @Setter
