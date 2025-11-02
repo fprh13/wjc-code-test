@@ -26,6 +26,24 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    /*
+        [문제] 잘못된 Optional의 활용
+
+        [원인]
+            Optional 내부 존재 여부를 isPresent()로 직접 확인한 뒤, 다시 get()으로 값을 꺼내고 있습니다.
+            Optional의 활용이 잘못되었으며, 가독성을 떨어뜨리고 있습니다.
+
+        [개선안]
+            대안:
+                Optional에서 제공하는 메서드를 활용합니다.
+
+            선택 근거:
+                Optional의 장점은 NPE를 방지하고 값의 존재 여부에 따라 확실하게 제어를 할 수 있다는 점입니다.
+                orElseThrow() 메서드를 사용하면 간결하게 예외 처리가 가능해지기 때문에 가독성도 좋아집니다.
+                ex)
+                return productRepository.findById(productId)
+                        .orElseThrow(() -> new RuntimeException("product not found"));
+     */
     public Product getProductById(Long productId) {
         Optional<Product> productOptional = productRepository.findById(productId);
         if (!productOptional.isPresent()) {
