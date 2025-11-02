@@ -14,6 +14,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/*
+    [문제] Entity 응답 문제
+
+    [원인] 별도의 응답 Dto없이 Product를 그대로 응답하고 있습니다.
+
+    [개선안]
+        대안:
+            Product를 응답 Dto로 변환하여 전달합니다.
+
+        선택 근거:
+            Entity가 변경되면 응답에 대한 API 스펙이 변경되기 때문에 유지보수성이 떨어집니다.
+            또한, 테이블의 구조를 외부에 노출하면, 해커에게 힌트를 제공하게 될 수 있습니다.
+            그리고 만약 데이터베이스에 민감 정보가 노출 된다면 보안 사고로 이어질 수 있습니다.
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
