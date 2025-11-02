@@ -104,6 +104,32 @@ public class ProductController {
         return ResponseEntity.ok(new ProductListResponse(productList.getContent(), productList.getTotalPages(), productList.getTotalElements(), productList.getNumber()));
     }
 
+    /*
+        [문제] 메서드명이 의도와 다릅니다.
+
+        [원인] 복사, 붙여넣기 과정에서 발생한 오타로 판단되고, 현재는 오버로딩으로 인해 정상 동작 중입니다.
+
+        [개선안]
+            대안:
+                카테고리 목록 조회에 맞는 메서드명으로 변경합니다.
+                이처럼 식별하기 어려운 오타나 의도와 다른 메서드명 문제는 발견이 쉽지 않습니다.
+                AI 코드 리뷰 봇을 도입하면 PR 단계에서 이러한 오타나 잘못된 메서드명을 자동으로 검증할 수 있습니다.
+                또한, 팀원끼리 컨트롤러 메서드명 컨벤션을 정의하여 코드 리뷰 시 확인하는 절차를 거치도록 할 수 있습니다.
+
+            트레이드오프:
+                이런 사소한 문제는 리뷰어도 놓치기 쉽지만, AI 코드 리뷰 봇을 사용하면 손쉽게 식별할 수 있어 개발 생산성을 높일 수 있습니다.
+                다만, 실무에서는 회사의 보안 정책을 고려해야합니다.
+
+            선택 근거:
+                카테고리 목록 조회에 맞는 네이밍으로 변경하면 문제는 해결됩니다.
+                하지만 이런 사소한 오타는 코드 리뷰 과정에서 놓치기 쉽습니다.
+
+                기능의 정확성이나 설계 의도를 함께 검토하고, 각자의 의견을 교환하는 과정이 코드리뷰라고 생각합니다.
+                개발자가 코드 품질과 설계에 집중할 수 있도록, 이런 사소한 부분을 AI 코드 리뷰 봇이 자동으로 검출해준다면
+                개발 생산성이 향상될 것입니다.
+
+                이것이 AI 시대를 맞은 개발자들의 올바른 AI 활용 전략이라고 생각합니다.
+     */
     @GetMapping(value = "/product/category/list")
     public ResponseEntity<List<String>> getProductListByCategory(){
         List<String> uniqueCategories = productService.getUniqueCategories();
